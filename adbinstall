@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+adb devices|tail -n +2|cut -f -1|sed '$d'|
+while read line 
+do 
+	echo "Installing on $(adb -s $line shell getprop ro.product.model)"
+	adb -s $line install "$1" 
+done
